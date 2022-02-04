@@ -1,39 +1,40 @@
+
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "pavit"
+  name: "team-4a"
   namespace: "default"
   labels:
-    app: "pavit"
+    app: "team-4a"
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: "pavit"
+      app: "team-4a"
   template:
     metadata:
       labels:
-        app: "pavit"
+        app: "team-4a"
     spec:
       containers:
       - name: "onlinesale-sha256-1"
-        image: "gcr.io/cap1-339903/github.com/pavithracherukuri/onlinesale@sha256:8e8cc39314d1b924ae3fcf3ea84a7b743c1812b3833a106cfacb381e6f739eeb"
+        image: "gcr.io/cap1-339903/github.com/pavithracherukuri/onlinesale@sha256:52d70095ba98f4c4db88a7559b2ecb862c0a3d98b9c09591b1486e187414a3b3"
 ---
 apiVersion: "autoscaling/v2beta1"
 kind: "HorizontalPodAutoscaler"
 metadata:
-  name: "pavit-hpa-bfra"
+  name: "team-4a-hpa-dovg"
   namespace: "default"
   labels:
-    app: "pavit"
+    app: "team-4a"
 spec:
   scaleTargetRef:
     kind: "Deployment"
-    name: "pavit"
+    name: "team-4a"
     apiVersion: "apps/v1"
   minReplicas: 1
-  maxReplicas: 1
+  maxReplicas: 5
   metrics:
   - type: "Resource"
     resource:
