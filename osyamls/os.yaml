@@ -1,37 +1,36 @@
-
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "team-4a"
+  name: "team4-a"
   namespace: "default"
   labels:
-    app: "team-4a"
+    app: "team4-a"
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: "team-4a"
+      app: "team4-a"
   template:
     metadata:
       labels:
-        app: "team-4a"
+        app: "team4-a"
     spec:
       containers:
       - name: "onlinesale-sha256-1"
-        image: "gcr.io/cap1-339903/github.com/pavithracherukuri/onlinesale@sha256:52d70095ba98f4c4db88a7559b2ecb862c0a3d98b9c09591b1486e187414a3b3"
+        image: "gcr.io/cap1-339903/github.com/pavithracherukuri/onlinesale@sha256:42d0bbd30cd48a486a937a8e3e018f5d4ae4a26f05e0a17884c96274e4dd04f0"
 ---
 apiVersion: "autoscaling/v2beta1"
 kind: "HorizontalPodAutoscaler"
 metadata:
-  name: "team-4a-hpa-dovg"
+  name: "team4-a-hpa-lqbk"
   namespace: "default"
   labels:
-    app: "team-4a"
+    app: "team4-a"
 spec:
   scaleTargetRef:
     kind: "Deployment"
-    name: "team-4a"
+    name: "team4-a"
     apiVersion: "apps/v1"
   minReplicas: 1
   maxReplicas: 5
@@ -40,3 +39,4 @@ spec:
     resource:
       name: "cpu"
       targetAverageUtilization: 80
+
