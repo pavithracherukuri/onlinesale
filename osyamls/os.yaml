@@ -1,0 +1,41 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "pavit"
+  namespace: "default"
+  labels:
+    app: "pavit"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "pavit"
+  template:
+    metadata:
+      labels:
+        app: "pavit"
+    spec:
+      containers:
+      - name: "onlinesale-sha256-1"
+        image: "gcr.io/cap1-339903/github.com/pavithracherukuri/onlinesale@sha256:8e8cc39314d1b924ae3fcf3ea84a7b743c1812b3833a106cfacb381e6f739eeb"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "pavit-hpa-bfra"
+  namespace: "default"
+  labels:
+    app: "pavit"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "pavit"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 1
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
